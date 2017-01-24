@@ -23,8 +23,8 @@ describe Underlock do
     end
   end
 
-  # Underlock.encrypt('string')
-  # Underlock.encrypt(File.new)
-  # Underlock.decrypt('encrypted-string')
-  # Underlock.decrypt(File.new)
+  # Underlock::Base.encrypt('string')
+  # Underlock::Base.encrypt(File.new)
+  # Underlock::Base.decrypt('encrypted-string')
+  # Underlock::Base.decrypt(File.new)
 end
