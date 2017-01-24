@@ -1,5 +1,5 @@
 require "underlock/version"
+require "underlock/base"
 
 module Underlock
-  # Your code goes here...
 end
