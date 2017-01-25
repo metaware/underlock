@@ -12,6 +12,12 @@ Add this line to your application's Gemfile:
 gem 'underlock'
 ```
 
+```
+p = OpenSSL::PKey::RSA.new 4096
+p.to_pem
+p.public_key.to_pem
+```
+
 And then execute:
 
     $ bundle
