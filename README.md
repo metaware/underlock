@@ -61,18 +61,22 @@ You should persist or store the `key` and `iv` in order to be able to decrypt th
 
 ### Decrypting Strings/Text
 
-1. Create an instance of `Underlock::EncryptedEntity`, use the `key` and `iv` collected in the previous steps.
+- Create an instance of `Underlock::EncryptedEntity`, use the `key` and `iv` collected in the previous steps.
 
 ```ruby
 irb> encrypted_entity = Underlock::EncryptedEntity.new(value: value, key: key, iv: iv)
 ```
 
-2. Decrypt as follows:
+- Decrypt as follows:
 
 ```ruby
 irb> encrypted_entity.decrypt
 irb> Underlock::Base.decrypt(encrypted_entity)
 ```
+
+### Encrypting Files
+
+TODO: Documentation coming soon, please see `spec/` folder until then.
 
 ## Development
 
