@@ -12,12 +12,6 @@ Add this line to your application's Gemfile:
 gem 'underlock'
 ```
 
-```
-p = OpenSSL::PKey::RSA.new 4096
-p.to_pem
-p.public_key.to_pem
-```
-
 And then execute:
 
     $ bundle
@@ -26,6 +20,25 @@ Or install it yourself as:
 
     $ gem install underlock
 
+## Initialization
+
+```
+Underlock::Base.configure do |config|
+  config.public_key  = File.read('./spec/key.pub')
+  config.private_key = File.read('./spec/key.priv')
+  config.cipher      = OpenSSL::Cipher.new('aes-256-gcm')
+end
+```
+
+For the `config.cipher` value, all algorithms available in `OpenSSL::Cipher.ciphers` are supported.
+
+## Generating Public/Private keypair
+```
+key = OpenSSL::PKey::RSA.new 4096
+puts key.to_pem
+puts key.public_key.to_pem
+```
+
 ## Usage
 
 TODO: Write usage instructions here
@@ -33,8 +46,6 @@ TODO: Write usage instructions here
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Contributing
 
