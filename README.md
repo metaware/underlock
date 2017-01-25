@@ -1,8 +1,6 @@
- # Underlock
+# Underlock
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/underlock`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Underlock makes it dead simple to encrypt and decrypt your data and files. It comes with little to no dependencies and has a very small API surface.
 
 ## Installation
 
