@@ -1,4 +1,4 @@
-# Underlock
+ # Underlock
 
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/underlock`. To experiment with that code, run `bin/console` for an interactive prompt.
 
@@ -42,7 +42,36 @@ puts key.public_key.to_pem
 
 ## Usage
 
-TODO: Write usage instructions here
+#### Encrypting Strings/Text
+
+```
+irb> Underlock::Base.encrypt("super secret message")
+=> #<Underlock::EncryptedEntity:0x007fef2e4b8320>
+```
+
+`Underlock::EncryptedEntity` has the following 3 methods
+```
+encrypted_entity.value
+encrypted_entity.key
+encrypted_entity.iv
+```
+
+You should persist or store the `key` and `iv` in order to be able to decrypt the encrypted `value`.
+
+#### Decrypting Strings/Text
+
+1. Create an instance of `Underlock::EncryptedEntity`, use the `key` and `iv` collected in the previous steps.
+
+```
+irb> encrypted_entity = Underlock::EncryptedEntity.new(value: value, key: key, iv: iv)
+```
+
+2. Decrypt as follows:
+
+```
+irb> encrypted_entity.decrypt
+irb> Underlock::Base.decrypt(encrypted_entity)
+```
 
 ## Development
 

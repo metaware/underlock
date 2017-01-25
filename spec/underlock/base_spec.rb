@@ -57,37 +57,37 @@ describe Underlock::Base do
   context 'file encryption' do
     let(:secret)  { Underlock::Base.encrypt(file) }
 
-    context 'encrypt' do
-      let(:file) { File.open('./spec/files/file.pdf') }
-      
-      it 'should return an instance of EncryptedEntity' do
-        expect(secret).to be_an_instance_of(Underlock::EncryptedEntity)
+    %w(file.pdf file.txt).each do |filename|
+      let(:file)    { File.open("./spec/files/#{filename}") }
+
+      context 'encrypt' do
+        
+        it 'should return an instance of EncryptedEntity' do
+          expect(secret).to be_an_instance_of(Underlock::EncryptedEntity)
+        end
+
+        it 'should respond to #encrypted_file' do
+          expect(secret).to respond_to(:encrypted_file)
+        end
+
+        it 'should not have the original value' do
+          expect(File.read(secret.encrypted_file)).to_not eq(File.read(file))
+        end
       end
 
-      it 'should respond to #encrypted_file' do
-        expect(secret).to respond_to(:encrypted_file)
+      context 'decrypt' do
+        let(:encrypted_entity) { Underlock::Base.encrypt(file) }
+
+        it 'should be able to return a file for an encrypted file' do
+          expect(Underlock::Base.decrypt(encrypted_entity)).to be_an_instance_of(File)
+        end
+
+        it 'should be able to read the contents of the file' do
+          decrypted_file = Underlock::Base.decrypt(encrypted_entity)
+          yomu = Yomu.new(decrypted_file.to_path)
+          expect(yomu.text.strip).to eq("super secret message in the pdf file")
+        end
       end
-
-      it 'should not have the original value' do
-        expect(File.read(secret.encrypted_file)).to_not eq(File.read(file))
-      end
-    end
-
-    context 'decrypt' do
-
-      let(:file)             { File.open('./spec/files/file.pdf') }
-      let(:encrypted_entity) { Underlock::Base.encrypt(file) }
-
-      it 'should be able to return a file for an encrypted file' do
-        expect(Underlock::Base.decrypt(encrypted_entity)).to be_an_instance_of(File)
-      end
-
-      it 'should be able to read the contents of the file' do
-        decrypted_file = Underlock::Base.decrypt(encrypted_entity)
-        yomu = Yomu.new(decrypted_file.to_path)
-        expect(yomu.text.strip).to eq("super secret message in the pdf file")
-      end
-
     end
 
   end
