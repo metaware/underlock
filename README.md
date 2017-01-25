@@ -24,8 +24,8 @@ Or install it yourself as:
 
 ```ruby
 Underlock::Base.configure do |config|
-  config.public_key  = File.read('./spec/key.pub')
-  config.private_key = File.read('./spec/key.priv')
+  config.public_key  = File.read('./key.pub')
+  config.private_key = File.read('./key.priv')
   config.cipher      = OpenSSL::Cipher.new('aes-256-gcm')
 end
 ```
