@@ -22,7 +22,7 @@ Or install it yourself as:
 
 ## Initialization
 
-```
+```ruby
 Underlock::Base.configure do |config|
   config.public_key  = File.read('./spec/key.pub')
   config.private_key = File.read('./spec/key.priv')
@@ -33,7 +33,8 @@ end
 For the `config.cipher` value, all algorithms available in `OpenSSL::Cipher.ciphers` are supported.
 
 ## Generating Public/Private keypair
-```
+
+```ruby
 key = OpenSSL::PKey::RSA.new 4096
 puts key.to_pem
 puts key.public_key.to_pem
