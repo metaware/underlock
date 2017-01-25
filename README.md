@@ -67,10 +67,13 @@ You should persist or store the `key` and `iv` in order to be able to decrypt th
 irb> encrypted_entity = Underlock::EncryptedEntity.new(value: value, key: key, iv: iv)
 ```
 
-- Decrypt as follows:
+- Decrypt using one of the following methods:
 
 ```ruby
 irb> encrypted_entity.decrypt
+```
+
+```ruby
 irb> Underlock::Base.decrypt(encrypted_entity)
 ```
 
