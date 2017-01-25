@@ -9,8 +9,14 @@ module Underlock
 
     class << self
 
-      def encrypt(string)
-        Encryptor.encrypt(string)
+      def encrypt(unencrypted_value)
+        if Pathname.new(unencrypted_value).exist?
+          unencrypted_value = File.new(unencrypted_value)
+        end
+        case unencrypted_value
+          when File   then FileEncryptor.new.encrypt(unencrypted_value)
+          when String then Encryptor.new.encrypt(unencrypted_value)
+        end
       end
 
       def decrypt(encrypted_entity)
