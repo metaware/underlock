@@ -1,0 +1,24 @@
+language: ruby
+dist: trusty
+sudo: required
+cache: bundler
+bundler_args: --without console
+script:
+  - bundle exec rake spec
+rvm:
+  - 2.0
+  - 2.1
+  - 2.2
+  - 2.3.1
+  - rbx-3
+  - jruby-9.1.5.0
+  - ruby-head
+  - jruby-head
+env:
+  global:
+    - JRUBY_OPTS='--dev -J-Xmx1024M'
+    - COVERAGE='true'
+matrix:
+  allow_failures:
+    - rvm: ruby-head
+    - rvm: jruby-head
