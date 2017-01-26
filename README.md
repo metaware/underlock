@@ -93,7 +93,7 @@ encrypted_entity.key
 encrypted_entity.iv # iv stands for initialization vector here
 ```
 
-`#encrypted_file` is a `File` object. This file is saved in the same directory as your original file.
+`#encrypted_file` returns a `File` object. This file is saved in the same directory as your original file.
 
 ### Decrypting Files
 
