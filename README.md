@@ -52,7 +52,7 @@ irb> Underlock::Base.encrypt("super secret message")
 ```ruby
 encrypted_entity.value
 encrypted_entity.key
-encrypted_entity.iv
+encrypted_entity.iv # iv stands for initialization vector
 ```
 
 You should persist or store the `key` and `iv` in order to be able to decrypt the encrypted `value`.
@@ -77,7 +77,48 @@ irb> Underlock::Base.decrypt(encrypted_entity)
 
 ### Encrypting Files
 
-TODO: Documentation coming soon, please see `spec/` folder until then.
+To encrypt files, instead of passing a `String` object, pass a `File` object to `Underlock::Base.encrypt`
+
+```ruby
+irb> file = File.open('/path/to/your/secret/file.txt')
+irb> Underlock::Base.encrypt(file)
+=> #<Underlock::EncryptedEntity:0x007fef2e4b8320>
+```
+
+The return value is an instance of `Underlock::EncryptedEntity` and has the following methods:
+
+```ruby
+encrypted_entity.encrypted_file
+encrypted_entity.key
+encrypted_entity.iv # iv stands for initialization vector here
+```
+
+`#encrypted_file` is a `File` object. This file is saved in the same directory as your original file.
+
+### Decrypting Files
+
+- Create an instance of `Underlock::EncryptedEntity`, use the `key` and `iv` collected in the previous steps.
+
+```ruby
+irb> file = File.open('/path/to/your/secret/file.txt.enc')
+irb> encrypted_entity = Underlock::EncryptedEntity.new(encrypted_file: file, key: key, iv: iv)
+```
+
+- Decrypt using one of the following methods:
+
+```ruby
+irb> encrypted_entity.decrypt
+```
+
+```ruby
+irb> Underlock::Base.decrypt(encrypted_entity)
+```
+
+Following naming scheme is followed when encrypting/decrypting files:
+
+| original file name | encrypted file name | decrypted file name |
+|--------------------|---------------------|---------------------|
+| file.pdf           | file.pdf.enc        | file.decrypted.pdf  |
 
 ## Development
 
