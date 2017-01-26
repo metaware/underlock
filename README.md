@@ -32,6 +32,8 @@ end
 
 For the `config.cipher` value, all algorithms available in `OpenSSL::Cipher.ciphers` are supported.
 
+**Important Note: Choose your algorithm carefully and stick to it. It'll kind of suck to be not able to decrypt your encrypted data.**
+
 ## Generating Public/Private keypair
 
 ```ruby
