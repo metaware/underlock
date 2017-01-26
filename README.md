@@ -2,6 +2,8 @@
 
 Underlock makes it dead simple to encrypt and decrypt your data and files. It comes with little to no dependencies and has a very small API surface.
 
+[![Gem Version](https://badge.fury.io/rb/underlock.svg)](https://badge.fury.io/rb/underlock) [![Code Climate](https://codeclimate.com/github/metaware/underlock/badges/gpa.svg)](https://codeclimate.com/github/metaware/underlock) [![Build Status](https://travis-ci.org/metaware/underlock.svg?branch=master)](https://travis-ci.org/metaware/underlock)
+
 ## Installation
 
 Add this line to your application's Gemfile:
