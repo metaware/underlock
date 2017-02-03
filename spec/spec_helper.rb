@@ -10,8 +10,8 @@ RSpec.configure do |config|
     config.cipher      = OpenSSL::Cipher.new('aes-256-gcm')
   end
 
-  # config.after(:suite) do
-  #   FileUtils.rm('./spec/files/file.pdf.enc')
-  #   FileUtils.rm('./spec/files/file.decrypted.pdf')
-  # end
+  config.after(:suite) do
+    FileUtils.rm Dir.glob('./spec/files/*.decrypted.txt')
+    FileUtils.rm Dir.glob('./spec/files/*.enc')
+  end
 end
