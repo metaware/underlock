@@ -9,8 +9,8 @@ module Underlock
       key = cipher.random_key
       iv  = cipher.random_iv
 
-      File.open(encrypted_filepath, "w") do |encrypted_file|
-        File.open(file) do |inf|
+      File.open(encrypted_filepath, "wb") do |encrypted_file|
+        File.open(file, 'rb') do |inf|
           loop do
             r = inf.read(4096)
             break unless r
@@ -36,7 +36,7 @@ module Underlock
       @base_dir, @filename = File.split(encrypted_entity.encrypted_file)
 
       File.open(decrypted_filepath, 'wb') do |decrypted_file|
-        File.open(encrypted_entity.encrypted_file) do |inf|
+        File.open(encrypted_entity.encrypted_file, 'rb') do |inf|
           loop do
             r = inf.read(4096)
             break unless r
